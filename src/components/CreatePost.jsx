@@ -8,7 +8,7 @@ const CreatePost = () => {
   const postBody = useRef();
   const reactions = useRef();
   const tags = useRef();
-
+//noting
   const handleSubmit = (event) => {
     event.preventDefault();
     const userid = userId.current.value;
