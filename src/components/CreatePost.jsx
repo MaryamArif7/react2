@@ -17,7 +17,11 @@ const CreatePost = () => {
     const react = reactions.current.value;
     const hash = tags.current.value.split(' ');
 
-    // Call addPost function here
+    userId.current.value="";
+    titleId.current.value="";
+     postBody.current.value="";
+     reactions.current.value="";
+     tags.current.value="";
     addPost(userid, title, body, react, hash);
   }
 
