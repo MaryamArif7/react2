@@ -7,6 +7,7 @@ width: 100%;
 }
 .sidebar{
   min-height: 800px;
+  width: 80px;
 }
 .post-card{
   margin-top: 20px;
@@ -15,4 +16,15 @@ width: 100%;
 }
 .tag{
   margin:0px 5px;
+}
+.reactions{
+  margin-top: 15px;
+  width: 100%;
+}
+.post{
+  width: 60%;
+  margin-left: 50px;
+  margin-top: 50px;
+
+
 }

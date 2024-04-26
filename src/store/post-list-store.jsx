@@ -4,7 +4,6 @@
     ->make sure to use "children" with small c not capital c otheriwse it wil throw the big error ,the children with captil C
     exist in the react so it wil get confused
 
-
 */}
 import {  createContext, useReducer } from "react";
 //anything we pass in the createConetxt comes in the autocomplete
@@ -23,8 +22,18 @@ export const PostList =createContext( {
 });
 //->the postlist  is a reducer funcion ,it takes two arguments one is current value 
 //and another argument is action
+//->if the id of the post doenst match keep that post , delete the remaing one 
+//then the reducer will repaint the postlist as the postlist has been changed
 const postListReducer=( currPostList,action)=>{
-    return currPostList;
+    let currentPostList=currPostList;
+    if(action.type==="DELETE_POST"){
+        currentPostList=currPostList.filter(post=>post.id !==action.payload.postId);
+
+    }
+    else if(action.type==="ADD_POST"){
+        currentPostList=[action.payload,...currPostList]
+    }
+    return currentPostList;
 }
 
 //we need post list state can be made too ,and we know post is complex so we can use reducer 
@@ -39,10 +48,35 @@ const PostListProvider=({children})=>{
  //->post list for the reducer 
  //->the post list and other two metods for the conext provider that means if anyone tries to get the 
  //post list then they will get vlaues 
- const addPost=()=>{
 
- }
- const deletePost=()=>{}
+ const addPost=(userid,title,body,react,hash)=>{
+    dispatch({
+        type:"ADD_POST",
+        payload:{
+        id:Date.now(),
+        title:title,
+        body:body,
+        reactions:react,
+        userId:userid,
+        tags:hash,
+        },
+        
+    })
+    
+     };
+ //action will go the postlistreducer which has current post list and action which is delete
+ //postid is not defined->error->if not passed in the deletPost action
+ const deletePost=(postId)=>{
+dispatch({
+    type:"DELETE_POST",
+    payload:{
+        
+            postId,
+        
+    },
+})
+
+ };
 return <PostList.Provider value={
    { postList:postList,
     addPost:addPost,
@@ -54,17 +88,17 @@ return <PostList.Provider value={
     {children}
 </PostList.Provider>
 }
-//
+//with the same id ,if the delete button was clicked it was deleting both posts
 const defaultValues=[{
 id:'1',
-title:'interview coming',
+title:'nothing is happening',
 body:'  By nurturing our curiosity, we open doors to new possibilities, discover hidden truths, and embark on transformative journeys that enrich both our minds and our lives. Embrace curiosity, for it is the beacon that illuminates the path to discovery and enlightenment.',
 reactions:1,
 userId:'user-11',
 tags:['peace','interview','nervous'],
 },
 {
-    id:'1',
+    id:'2',
     title:'interview going',
     body:' Curiosity is the engine of human progress, propelling us to explore the unknown, question the status quo, and seek deeper understanding ',
     reactions:10,
