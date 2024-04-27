@@ -28,3 +28,13 @@ width: 100%;
 
 
 }
+.message{
+  margin-top: 70px;
+  margin-left: 70px;
+}
+.button{
+  width: 30%;
+  margin-left:30%;
+  color: aqua;
+
+}

@@ -18,10 +18,11 @@ import {  createContext, useReducer } from "react";
 export const PostList =createContext( {
     postList:[],
     addPost:()=>{},
-    deletePost:()=>{}
+    deletePost:()=>{},
+    addPosts:()=>{}
 });
 //->the postlist  is a reducer funcion ,it takes two arguments one is current value 
-//and another argument is action
+  //and another argument is action
 //->if the id of the post doenst match keep that post , delete the remaing one 
 //then the reducer will repaint the postlist as the postlist has been changed
 const postListReducer=( currPostList,action)=>{
@@ -32,6 +33,9 @@ const postListReducer=( currPostList,action)=>{
     }
     else if(action.type==="ADD_POST"){
         currentPostList=[action.payload,...currPostList]
+    }
+    else if(action.type==="ADD_POSTS"){
+        currentPostList=action.payload.posts
     }
     return currentPostList;
 }
@@ -44,7 +48,7 @@ const postListReducer=( currPostList,action)=>{
 const PostListProvider=({children})=>{
  //->useReducer is like a state ,it has default value and the  default postlist can 
  //also acess the default list and post list is passed to the context   
- const [postList,dispatch]=useReducer(postListReducer,defaultValues);
+ const [postList,dispatch]=useReducer(postListReducer,[]);
  //->post list for the reducer 
  //->the post list and other two metods for the conext provider that means if anyone tries to get the 
  //post list then they will get vlaues 
@@ -59,6 +63,17 @@ const PostListProvider=({children})=>{
         reactions:react,
         userId:userid,
         tags:hash,
+        },
+        
+    })
+    
+     };
+     
+ const addPosts=(posts)=>{
+    dispatch({
+        type:"ADD_POSTS",
+        payload:{
+        id:posts,
         },
         
     })
@@ -80,7 +95,8 @@ dispatch({
 return <PostList.Provider value={
    { postList:postList,
     addPost:addPost,
-    deletePost:deletePost
+    deletePost:deletePost,
+    addPosts:addPosts
 
 
 }
@@ -89,22 +105,6 @@ return <PostList.Provider value={
 </PostList.Provider>
 }
 //with the same id ,if the delete button was clicked it was deleting both posts
-const defaultValues=[{
-id:'1',
-title:'nothing is happening',
-body:'  By nurturing our curiosity, we open doors to new possibilities, discover hidden truths, and embark on transformative journeys that enrich both our minds and our lives. Embrace curiosity, for it is the beacon that illuminates the path to discovery and enlightenment.',
-reactions:1,
-userId:'user-11',
-tags:['peace','interview','nervous'],
-},
-{
-    id:'2',
-    title:'interview going',
-    body:' Curiosity is the engine of human progress, propelling us to explore the unknown, question the status quo, and seek deeper understanding ',
-    reactions:10,
-    userId:'user-12',
-    tags:['peace','finshed','nervous'],
-    }
-];
+
 
 export default PostListProvider;
