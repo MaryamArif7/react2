@@ -1,0 +1,11 @@
+UseEffect Hook:takes two args->function and ->dependcy array
+it  used for data fetching or event listners
+->runs autmatically after every render by default
+->its second array is a dependcy array:if its not given then the UseEffect will fetch the data again
+and again and will keep making the network calls , but if the there is  no change in the ui, ui will not chaange
+-> React handles it smartly ,when it render , it comapares the prevoius value and new value if  there is no chnage it will
+not make any update,the key is there for this , we have key for every post in postlist
+->if there is no argument is 1->then it will run only for once
+->if we have something in array->then it will chnage when that thing changes in dependcy array
+
+

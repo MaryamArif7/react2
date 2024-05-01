@@ -1,0 +1,13 @@
+->in react it happens that if there is some chnage in parent component , only parent compoenet
+will repaint not the children component
+->but when we have two function,and both are doing same functionlaity 
+but have samme name , but functions are treated as objects in js
+when we comapre both of the fucntions the answer is false they are two diffrent objects 
+so n react if a function is called twice that neans ,two different objects aare created.
+->use called is for this ,we can memoization this function using callback 
+pass the function to the callback then in dependcy array pass on whatever it depends ,when the the dependent
+change then it will change otherwis this returns a refrence off this method which does not change doest matter 
+how many time it gets repaint,if we dnt use it then the chilften who have reveived it
+as prop for them it will repaint too
+->for method save->callback
+->for value save->memo

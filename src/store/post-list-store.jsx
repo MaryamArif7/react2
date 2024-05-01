@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer,useContext } from "react";
   /*
 -> usecontext is used to way to manage the state between the child componenets  without having down to pass the props to the child componenets
 ->we need to create an object basically a context object ,using React.createContext function
