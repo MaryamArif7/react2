@@ -3,7 +3,8 @@
 // eslint-disable-next-line react/prop-types
 const SideBar = ({selectedTab,setSelectedTab}) => {
   const handleOnClick=(tabName)=>{
-    selectedTab(tabName);
+    setSelectedTab(tabName);
+
   }
   return (
     <>
